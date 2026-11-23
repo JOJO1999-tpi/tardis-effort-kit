@@ -8,10 +8,6 @@
   <img src="assets/tardis-effort-demo.gif" alt="TARDIS Thinking Effort Slider Demo" width="760" />
 </p>
 
-<p align="center">
-  <img src="assets/codex-5stage-preview.png" alt="TARDIS 5-Stage Effort Preview" width="760" />
-</p>
-
 ---
 
 ## English
@@ -22,14 +18,13 @@
 
 | Visual Stage | Scene | Description |
 | --- | --- | --- |
-| **0 — London Lights Off** | Quiet London Night | TARDIS parked in drizzle with all exterior lights turned off (`codex-animation` 5-stage edition, static frame with sequential light-off/light-on transitions to/from London Standby) |
 | **1 — London Standby** | 10th Doctor in London | Rainy London cobblestone street with warm lantern glow and the 10th Doctor leaning beside the glowing police box |
 | **2 — Earth Orbit** | Low-Earth Orbit | Weightless hover above the sunlit blue planet and atmospheric rim |
 | **3 — Deep Space** | Deep-Space Cruise | Crisp 90-degree rigid rotation and warp streaks across deep-space starfields |
 | **4 — Time Vortex** | 10th Doctor Vortex | Blue-and-orange Time Vortex turbulence with lightning flashes and pixel afterimages |
 
 Highlights:
-- **Forward & Return Cinema Transitions**: Lowering effort plays dedicated return-to-orbit / rain-night materialization transitions rather than clumsily rewinding frames.
+- **Forward & Return Cinema Transitions**: Lowering effort plays dedicated return-to-orbit / cut / rain-night rematerialization transitions rather than clumsily rewinding frames.
 - **Zero Idle Overhead**: Automatically enters low-power sleep after idle inactivity and respects system reduced-motion preferences where supported.
 - **Zero External Runtime Dependencies**: Pure Canvas2D pixel art synthesized programmatically — no external image sprites required.
 
@@ -41,8 +36,7 @@ Highlights:
 | --- | --- | --- | --- |
 | **Hermes Desktop** | [`desktop/`](desktop/) | `hermes-tardis-effort-plugin.zip` | Standalone runtime plugin. Adapts stops to each model's real capabilities, syncs Thinking / Fast / Daybreak with the live gateway, survives `hermes update`. |
 | **DSH (DeepSeek Harness)** | [`packages/dsh/`](packages/dsh/) | `dsh-tardis-effort-0.1.1.tgz` | Composer popup plugin (`v0.1.1`). Unified DeepSeek model search + dynamic reasoning-effort slider + session permission switching. |
-| **Antigravity Desktop** | [`packages/antigravity/`](packages/antigravity/) | `antigravity-tardis-effort-0.2.1.zip` | Frontend extension (`v0.2.1`) for the Chuanban theme patch (`customJs`, tested on Antigravity `2.34.0`). OffscreenCanvas worker rendering, live theme colors, orchestrator & standard model effort control, and a Native Menu shortcut. |
-| **Codex (5-Stage Animation)** | [`packages/codex-animation/`](packages/codex-animation/) | `codex-tardis-preview.html` | Reusable 5-stage ESM Canvas component (`low` / `medium` / `high` / `xhigh` / `max`) + standalone offline HTML preview. *(Codex Desktop's public plugin API does not currently expose a composer effort-slider UI slot.)* |
+| **Antigravity Desktop** | [`packages/antigravity/`](packages/antigravity/) | `antigravity-tardis-effort-0.2.1.zip` | Frontend extension (`v0.2.1`) loaded via the [Chuanban Antigravity theme patch (`chuanban-antigravity-theme-patch`)](https://github.com/Anarcadia/chuanban-antigravity-theme-patch) (`customJs`, tested on Antigravity `2.34.0`). OffscreenCanvas worker rendering, live theme colors, orchestrator & standard model effort control, and a Native Menu shortcut. |
 | **Core & Web Workbench** | [`core/`](core/) | Included in repo | Standalone UMD/global Canvas2D slider core (`core/tardis-effort-core.js`) and interactive HTML workbench (`core/demo.html`). |
 
 ---
@@ -71,11 +65,7 @@ See [`desktop/README.md`](desktop/README.md) for settings (`hideNativePill`, `hi
 
 #### 2. DSH (DeepSeek Harness) `v0.1.1`
 
-Download `dsh-tardis-effort-0.1.1.tgz` from [Releases](https://github.com/JOJO1999-tardis-effort-kit/releases) — wait: let's fix URL carefully! (`JOJO1999-tpi/tardis-effort-kit/releases`!). Wait: glad I caught that while thinking!
-
-Let's keep checking URLs: `https://github.com/JOJO1999-tpi/tardis-effort-kit/releases`.
-
-Quit DSH, then run in PowerShell:
+Download `dsh-tardis-effort-0.1.1.tgz` from [Releases](https://github.com/JOJO1999-tpi/tardis-effort-kit/releases). Quit DSH, then run in PowerShell:
 ```powershell
 $dsh = '<path-to-dsh>\resources\runtime\cli\bin\dsh.cmd'
 $package = '<path-to>\dsh-tardis-effort-0.1.1.tgz'
@@ -85,9 +75,10 @@ Use `--profile web` instead of `--profile desktop` for `dsh web`. See [`packages
 
 #### 3. Antigravity Desktop `v0.2.1`
 
-Requires the Chuanban theme patch with `customJs` enabled (tested on Antigravity `2.34.0`).
+Because Antigravity Desktop does not expose a built-in composer effort-slider plugin API, this extension attaches through the `user/custom.js` hot-reload hook provided by [Anarcadia/chuanban-antigravity-theme-patch](https://github.com/Anarcadia/chuanban-antigravity-theme-patch) (tested on Antigravity `2.34.0`).
 
-Download and extract `antigravity-tardis-effort-0.2.1.zip` from [Releases](https://github.com/JOJO1999-tpi/tardis-effort-kit/releases), then run inside the extracted directory:
+1. Ensure the Chuanban theme patch is installed with `customJs` enabled.
+2. Download and extract `antigravity-tardis-effort-0.2.1.zip` from [Releases](https://github.com/JOJO1999-tpi/tardis-effort-kit/releases), then run inside the extracted directory:
 ```powershell
 node install.cjs install
 ```
@@ -96,19 +87,6 @@ To uninstall cleanly:
 node install.cjs remove
 ```
 *(If installing directly from [`packages/antigravity/`](packages/antigravity/) source, run `node build.cjs` first to generate `tardis-antigravity.js`.)* See [`packages/antigravity/README.md`](packages/antigravity/README.md).
-
-#### 4. Codex 5-Stage Animation
-
-- **Offline Preview**: Download `codex-tardis-preview.html` from [Releases](https://github.com/JOJO1999-tardis-effort-kit/releases) and open it directly in any browser.
-- **Embed in Code**: Build [`packages/codex-animation/`](packages/codex-animation/) with `node build.cjs` to produce `codex-tardis.mjs`:
-  ```js
-  import { mountTardisAnimation } from './codex-tardis.mjs';
-
-  const animation = mountTardisAnimation(canvas, { effort: 'low' });
-  animation.setEffort('medium');
-  // Call animation.destroy() on unmount.
-  ```
-See [`packages/codex-animation/README.md`](packages/codex-animation/README.md).
 
 ---
 
@@ -122,9 +100,6 @@ cd packages/dsh && node build.cjs && npm pack
 
 # Antigravity extension (generates packages/antigravity/tardis-antigravity.js)
 cd packages/antigravity && node build.cjs
-
-# Codex 5-stage animation (generates codex-tardis.mjs and codex-tardis-preview.html)
-cd packages/codex-animation && node build.cjs
 ```
 
 ---
@@ -134,8 +109,7 @@ cd packages/codex-animation && node build.cjs
 ```text
 tardis-effort-kit/
 ├── assets/
-│   ├── tardis-effort-demo.gif        # 4-stage interactive slider demo GIF
-│   └── codex-5stage-preview.png      # 5-stage visual schematic (incl. London Lights Off)
+│   └── tardis-effort-demo.gif        # 4-stage interactive slider demo GIF
 ├── core/
 │   ├── tardis-effort-core.js         # Standalone UMD Canvas2D TARDIS effort slider core
 │   └── demo.html                     # Interactive standalone HTML workbench
@@ -146,8 +120,7 @@ tardis-effort-kit/
 │   └── README.md
 └── packages/
     ├── dsh/                          # DeepSeek Harness (DSH) UI plugin source
-    ├── antigravity/                  # Antigravity Desktop Chuanban theme-patch extension source
-    └── codex-animation/              # Standalone 5-stage ES module & HTML preview source
+    └── antigravity/                  # Antigravity Desktop Chuanban theme-patch extension source
 ```
 
 ---
@@ -160,7 +133,6 @@ tardis-effort-kit/
 
 | 视觉阶段 | 场景名称 | 视觉表现 |
 | --- | --- | --- |
-| **0 — 伦敦熄灯** | Quiet London Night | 伦敦雨夜街道，TARDIS 顶部信号灯与窗格灯光全部熄灭（仅 `codex-animation` 五档版提供，静帧显示并与「伦敦待命」之间有顺序点灯/关灯过渡） |
 | **1 — 伦敦待命** | 10th Doctor in London | 伦敦雨夜石板街，街灯与门窗温暖发光，第 10 任博士倚靠在 TARDIS 旁 |
 | **2 — 地球轨道** | Earth Orbit | 近地轨道蓝星弧光之上静谧悬浮 |
 | **3 — 深空巡航** | Deep Space | 90° 刚体转向，高速星轨流光穿梭 |
@@ -179,8 +151,7 @@ tardis-effort-kit/
 | --- | --- | --- | --- |
 | **Hermes Desktop** | [`desktop/`](desktop/) | `hermes-tardis-effort-plugin.zip` | 独立运行时插件。按不同模型真实能力自动匹配 2/3/4 档，保留顶部思考/极速/Daybreak 开关并与网关实时同步；执行 `hermes update` 不丢失。 |
 | **DSH (DeepSeek Harness)** | [`packages/dsh/`](packages/dsh/) | `dsh-tardis-effort-0.1.1.tgz` | DSH 独立界面插件（`0.1.1`）。将模型搜索/切换、动态推理档位滑块与会话访问权限收拢到输入框同一弹出面板中。 |
-| **Antigravity 桌面版** | [`packages/antigravity/`](packages/antigravity/) | `antigravity-tardis-effort-0.2.1.zip` | 船板主题补丁用户前端扩展（`0.2.1`，适配 Antigravity `2.34.0`）。独立 OffscreenCanvas 线程绘制，继承主题配色，兼容普通模型与编排器档位，提供「原生菜单」入口。 |
-| **Codex 五档动画组件** | [`packages/codex-animation/`](packages/codex-animation/) | `codex-tardis-preview.html` | 独立 5 档 ESM 动画组件（`low` / `medium` / `high` / `xhigh` / `max`）与双机离线预览页。*（因 Codex 桌面版公开插件接口暂未开放原生滑块渲染槽位，本包作为可嵌入动画资产分发。）* |
+| **Antigravity 桌面版** | [`packages/antigravity/`](packages/antigravity/) | `antigravity-tardis-effort-0.2.1.zip` | 基于 [船板 Antigravity 主题补丁 (`chuanban-antigravity-theme-patch`)](https://github.com/Anarcadia/chuanban-antigravity-theme-patch) 的 `customJs` 用户前端扩展（`0.2.1`，适配 Antigravity `2.34.0`）。独立 OffscreenCanvas 线程绘制，继承主题配色，兼容普通模型与编排器档位，提供「原生菜单」入口。 |
 | **独立核心与网页演示** | [`core/`](core/) | 仓库内置 | 纯 Canvas2D UMD 滑块核心（`core/tardis-effort-core.js`）与交互式实验台（`core/demo.html`）。 |
 
 ---
@@ -197,7 +168,7 @@ tardis-effort-kit/
      ```
      *（或粘贴完整链接 `https://github.com/JOJO1999-tpi/tardis-effort-kit`，Hermes 会自动识别 [`desktop/plugin.js`](desktop/plugin.js) 并仅安装桌面插件目录。）*
 - **方式二：下载 Release 压缩包一键安装**
-  1. 前往 [Releases](https://github.com/JOJO1999-tardis-effort-kit/releases) 下载 `hermes-tardis-effort-plugin.zip` 并解压。
+  1. 前往 [Releases](https://github.com/JOJO1999-tpi/tardis-effort-kit/releases) 下载 `hermes-tardis-effort-plugin.zip` 并解压。
   2. **Windows**：双击运行 `install-windows.bat`。
   3. **macOS / Linux**：终端运行 `bash install-unix.sh`。
 - **方式三：手动放入插件目录**
@@ -209,7 +180,7 @@ tardis-effort-kit/
 
 #### 2. DSH (DeepSeek Harness) `0.1.1`
 
-从 [Releases](https://github.com/JOJO1999-tardis-effort-kit/releases) 下载 `dsh-tardis-effort-0.1.1.tgz`，退出 DSH 后在 PowerShell 运行：
+从 [Releases](https://github.com/JOJO1999-tpi/tardis-effort-kit/releases) 下载 `dsh-tardis-effort-0.1.1.tgz`，退出 DSH 后在 PowerShell 运行：
 
 ```powershell
 $dsh = '<path-to-dsh>\resources\runtime\cli\bin\dsh.cmd'
@@ -221,9 +192,10 @@ $package = '<path-to>\dsh-tardis-effort-0.1.1.tgz'
 
 #### 3. Antigravity 桌面版 `0.2.1`
 
-需已启用船板主题补丁的 `customJs`（适配 Antigravity `2.34.0`）。
+由于 Antigravity 原生未开放输入框推理滑块扩展接口，本扩展需依托开源的 [船板 Antigravity 主题补丁 (`chuanban-antigravity-theme-patch`)](https://github.com/Anarcadia/chuanban-antigravity-theme-patch) 所提供的 `user/custom.js` 热加载钩子注入（适配 Antigravity `2.34.0`）。
 
-从 [Releases](https://github.com/JOJO1999-tardis-effort-kit/releases) 下载并解压 `antigravity-tardis-effort-0.2.1.zip`，在该目录执行：
+1. 先确保已安装船板主题补丁并启用了 `customJs`。
+2. 从 [Releases](https://github.com/JOJO1999-tpi/tardis-effort-kit/releases) 下载并解压 `antigravity-tardis-effort-0.2.1.zip`，在该目录执行：
 
 ```powershell
 node install.cjs install
@@ -237,11 +209,6 @@ node install.cjs remove
 
 *（如直接从本仓库源码 [`packages/antigravity/`](packages/antigravity/) 安装，请先运行 `node build.cjs` 生成 `tardis-antigravity.js`。）* 更多说明请见 [`packages/antigravity/README.md`](packages/antigravity/README.md)。
 
-#### 4. Codex 五档动画组件
-
-- **离线预览**：从 [Releases](https://github.com/JOJO1999-tardis-effort-kit/releases) 下载 `codex-tardis-preview.html`，用任意浏览器直接双击打开即可体验五档实时过渡。
-- **代码嵌入**：在 [`packages/codex-animation/`](packages/codex-animation/) 下执行 `node build.cjs` 生成 `codex-tardis.mjs` 后调用 `mountTardisAnimation(canvas, { effort: 'low' })`。详情请见 [`packages/codex-animation/README.md`](packages/codex-animation/README.md)。
-
 ---
 
 ### 从源码构建
@@ -254,9 +221,6 @@ cd packages/dsh && node build.cjs && npm pack
 
 # Antigravity 扩展（生成 packages/antigravity/tardis-antigravity.js）
 cd packages/antigravity && node build.cjs
-
-# Codex 五档动画（生成 codex-tardis.mjs 与 codex-tardis-preview.html）
-cd packages/codex-animation && node build.cjs
 ```
 
 ---

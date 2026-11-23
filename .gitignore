@@ -7,5 +7,3 @@ node_modules/
 *.zip
 packages/dsh/lib/
 packages/antigravity/tardis-antigravity.js
-packages/codex-animation/codex-tardis.mjs
-packages/codex-animation/codex-tardis-preview.html

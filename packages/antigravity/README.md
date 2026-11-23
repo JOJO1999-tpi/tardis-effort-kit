@@ -6,7 +6,7 @@
 
 ## English
 
-User frontend extension for the **Chuanban Antigravity theme patch** (`customJs`), tested on Antigravity Desktop `2.34.0`. Clicking the composer's model trigger opens a unified TARDIS popup to search/switch models and adjust reasoning effort, sourcing both standard models and orchestrator models/tiers directly from Antigravity's native selector.
+User frontend extension for the **[Chuanban Antigravity theme patch (`chuanban-antigravity-theme-patch`)](https://github.com/Anarcadia/chuanban-antigravity-theme-patch)** (`customJs`), tested on Antigravity Desktop `2.34.0`. Clicking the composer's model trigger opens a unified TARDIS popup to search/switch models and adjust reasoning effort, sourcing both standard models and orchestrator models/tiers directly from Antigravity's native selector.
 
 ### Features
 
@@ -17,7 +17,7 @@ User frontend extension for the **Chuanban Antigravity theme patch** (`customJs`
 
 ### Install & Uninstall
 
-Requires the Chuanban theme patch with `customJs` enabled.
+Requires [Anarcadia/chuanban-antigravity-theme-patch](https://github.com/Anarcadia/chuanban-antigravity-theme-patch) installed with `customJs` enabled.
 
 1. Download and extract `antigravity-tardis-effort-0.2.1.zip` from [Releases](https://github.com/JOJO1999-tpi/tardis-effort-kit/releases) (or run `node build.cjs` in this source directory first to generate `tardis-antigravity.js`).
 2. Inside the package directory, run:
@@ -46,7 +46,7 @@ node build.cjs
 
 ## 简体中文
 
-船板主题补丁的用户前端扩展，适配本机 Antigravity `2.34.0`。点击输入框底部的模型按钮，就能在同一面板搜索模型、切换模型和调节推理档位；普通模型和编排器的模型与档位均来自反重力原生选择器。
+面向 **[船板 Antigravity 主题、字体与汉化补丁 (`chuanban-antigravity-theme-patch`)](https://github.com/Anarcadia/chuanban-antigravity-theme-patch)** 的用户前端扩展（依赖其 `customJs` 钩子注入），适配本机 Antigravity `2.34.0`。点击输入框底部的模型按钮，就能在同一面板搜索模型、切换模型和调节推理档位；普通模型和编排器的模型与档位均来自反重力原生选择器。
 
 ### 核心特性
 
@@ -57,7 +57,7 @@ node build.cjs
 
 ### 安装与卸载
 
-需要已启用船板主题补丁的 `customJs`。
+需先安装 [Anarcadia/chuanban-antigravity-theme-patch](https://github.com/Anarcadia/chuanban-antigravity-theme-patch) 并启用 `customJs`。
 
 1. 从 [Releases](https://github.com/JOJO1999-tpi/tardis-effort-kit/releases) 下载并解压 `antigravity-tardis-effort-0.2.1.zip`（如直接使用本源码目录，请先运行 `node build.cjs` 生成 `tardis-antigravity.js`）。
 2. 在该目录运行：
