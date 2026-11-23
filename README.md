@@ -35,7 +35,7 @@ Highlights:
 | Client / Target | Directory | Release Asset | Status / Highlights |
 | --- | --- | --- | --- |
 | **Hermes Desktop** | [`desktop/`](desktop/) | `hermes-tardis-effort-plugin.zip` | Standalone runtime plugin. Adapts stops to each model's real capabilities, syncs Thinking / Fast / Daybreak with the live gateway, survives `hermes update`. |
-| **DSH (DeepSeek Harness)** | [`packages/dsh/`](packages/dsh/) | `dsh-tardis-effort-0.1.1.tgz` | Composer popup plugin (`v0.1.1`). Unified DeepSeek model search + dynamic reasoning-effort slider + session permission switching. |
+| **DSH (DeepSeek Harness)** | [`packages/dsh/`](packages/dsh/) | `dsh-tardis-effort-0.1.1.tgz` | Composer popup plugin (`v0.1.1`). Unified DeepSeek model search + dynamic reasoning-effort slider + session permission switching. Supports direct install via **Plugins → + Add plugin** using GitHub URL or `.tgz`. |
 | **Antigravity Desktop** | [`packages/antigravity/`](packages/antigravity/) | `antigravity-tardis-effort-0.2.1.zip` | Frontend extension (`v0.2.1`) loaded via the [Chuanban Antigravity theme patch (`chuanban-antigravity-theme-patch`)](https://github.com/Anarcadia/chuanban-antigravity-theme-patch) (`customJs`, tested on Antigravity `2.34.0`). OffscreenCanvas worker rendering, live theme colors, orchestrator & standard model effort control, and a Native Menu shortcut. |
 | **Core & Web Workbench** | [`core/`](core/) | Included in repo | Standalone UMD/global Canvas2D slider core (`core/tardis-effort-core.js`) and interactive HTML workbench (`core/demo.html`). |
 
@@ -65,13 +65,25 @@ See [`desktop/README.md`](desktop/README.md) for settings (`hideNativePill`, `hi
 
 #### 2. DSH (DeepSeek Harness) `v0.1.1`
 
-Download `dsh-tardis-effort-0.1.1.tgz` from [Releases](https://github.com/JOJO1999-tpi/tardis-effort-kit/releases). Quit DSH, then run in PowerShell:
-```powershell
-$dsh = '<path-to-dsh>\resources\runtime\cli\bin\dsh.cmd'
-$package = '<path-to>\dsh-tardis-effort-0.1.1.tgz'
-& $dsh plugin --profile desktop add "file:$package"
-```
-Use `--profile web` instead of `--profile desktop` for `dsh web`. See [`packages/dsh/README.md`](packages/dsh/README.md) for details.
+- **Option A — Install inside DSH UI (Recommended)**:
+  Open DSH → **Plugins → + Add plugin**, and paste any of the following:
+  - **GitHub Repository URL**:
+    ```text
+    https://github.com/JOJO1999-tpi/tardis-effort-kit
+    ```
+  - **Direct Release `.tgz` URL**:
+    ```text
+    https://github.com/JOJO1999-tpi/tardis-effort-kit/releases/download/v1.0.0/dsh-tardis-effort-0.1.1.tgz
+    ```
+  - **Local `.tgz` Path** *(useful if GitHub needs a local download first)*: Download `dsh-tardis-effort-0.1.1.tgz` from [Releases](https://github.com/JOJO1999-tpi/tardis-effort-kit/releases) and enter its absolute path (e.g. `C:\Users\<user>\Downloads\dsh-tardis-effort-0.1.1.tgz`).
+- **Option B — CLI Install (Desktop or `dsh web`)**:
+  Quit DSH, then run in PowerShell:
+  ```powershell
+  $dsh = '<path-to-dsh>\resources\runtime\cli\bin\dsh.cmd'
+  $package = '<path-to>\dsh-tardis-effort-0.1.1.tgz'
+  & $dsh plugin --profile desktop add "file:$package"
+  ```
+  Use `--profile web` instead of `--profile desktop` for `dsh web`. See [`packages/dsh/README.md`](packages/dsh/README.md) for details.
 
 #### 3. Antigravity Desktop `v0.2.1`
 
@@ -118,8 +130,9 @@ tardis-effort-kit/
 │   ├── install-windows.bat
 │   ├── install-unix.sh
 │   └── README.md
+├── package.json                      # Root DSH bundle entry enabling direct GitHub install
 └── packages/
-    ├── dsh/                          # DeepSeek Harness (DSH) UI plugin source
+    ├── dsh/                          # DeepSeek Harness (DSH) UI plugin source & built client
     └── antigravity/                  # Antigravity Desktop Chuanban theme-patch extension source
 ```
 
@@ -150,7 +163,7 @@ tardis-effort-kit/
 | 客户端 / 目标 | 目录 | Release 安装包 | 说明与特性 |
 | --- | --- | --- | --- |
 | **Hermes Desktop** | [`desktop/`](desktop/) | `hermes-tardis-effort-plugin.zip` | 独立运行时插件。按不同模型真实能力自动匹配 2/3/4 档，保留顶部思考/极速/Daybreak 开关并与网关实时同步；执行 `hermes update` 不丢失。 |
-| **DSH (DeepSeek Harness)** | [`packages/dsh/`](packages/dsh/) | `dsh-tardis-effort-0.1.1.tgz` | DSH 独立界面插件（`0.1.1`）。将模型搜索/切换、动态推理档位滑块与会话访问权限收拢到输入框同一弹出面板中。 |
+| **DSH (DeepSeek Harness)** | [`packages/dsh/`](packages/dsh/) | `dsh-tardis-effort-0.1.1.tgz` | DSH 独立界面插件（`0.1.1`）。将模型搜索/切换、动态推理档位滑块与会话访问权限收拢到输入框同一弹出面板中；支持直接在 DSH「插件 → + 添加插件」输入 GitHub 地址或 `.tgz` 安装。 |
 | **Antigravity 桌面版** | [`packages/antigravity/`](packages/antigravity/) | `antigravity-tardis-effort-0.2.1.zip` | 基于 [船板 Antigravity 主题补丁 (`chuanban-antigravity-theme-patch`)](https://github.com/Anarcadia/chuanban-antigravity-theme-patch) 的 `customJs` 用户前端扩展（`0.2.1`，适配 Antigravity `2.34.0`）。独立 OffscreenCanvas 线程绘制，继承主题配色，兼容普通模型与编排器档位，提供「原生菜单」入口。 |
 | **独立核心与网页演示** | [`core/`](core/) | 仓库内置 | 纯 Canvas2D UMD 滑块核心（`core/tardis-effort-core.js`）与交互式实验台（`core/demo.html`）。 |
 
@@ -180,15 +193,25 @@ tardis-effort-kit/
 
 #### 2. DSH (DeepSeek Harness) `0.1.1`
 
-从 [Releases](https://github.com/JOJO1999-tpi/tardis-effort-kit/releases) 下载 `dsh-tardis-effort-0.1.1.tgz`，退出 DSH 后在 PowerShell 运行：
-
-```powershell
-$dsh = '<path-to-dsh>\resources\runtime\cli\bin\dsh.cmd'
-$package = '<path-to>\dsh-tardis-effort-0.1.1.tgz'
-& $dsh plugin --profile desktop add "file:$package"
-```
-
-使用 `dsh web` 时将 `--profile desktop` 替换为 `--profile web`。更多用法与卸载命令请见 [`packages/dsh/README.md`](packages/dsh/README.md)。
+- **方式一（推荐）：在 DSH 界面直接安装（插件 → + 添加插件）**
+  打开 DSH → **插件 → + 添加插件**，粘贴以下任意一种地址即可安装：
+  - **GitHub 仓库地址（最直接）**：
+    ```text
+    https://github.com/JOJO1999-tpi/tardis-effort-kit
+    ```
+  - **Release `.tgz` 直链**：
+    ```text
+    https://github.com/JOJO1999-tpi/tardis-effort-kit/releases/download/v1.0.0/dsh-tardis-effort-0.1.1.tgz
+    ```
+  - **本地 `.tgz` 绝对路径** *（若本机直连 GitHub 需走本地文件）*：从 [Releases](https://github.com/JOJO1999-tpi/tardis-effort-kit/releases) 下载 `dsh-tardis-effort-0.1.1.tgz` 后填入完整路径（如 `C:\Users\<user>\Downloads\dsh-tardis-effort-0.1.1.tgz`）。
+- **方式二：命令行安装（适用于桌面版或 `dsh web`）**
+  退出 DSH 后在 PowerShell 运行：
+  ```powershell
+  $dsh = '<path-to-dsh>\resources\runtime\cli\bin\dsh.cmd'
+  $package = '<path-to>\dsh-tardis-effort-0.1.1.tgz'
+  & $dsh plugin --profile desktop add "file:$package"
+  ```
+  使用 `dsh web` 时将 `--profile desktop` 替换为 `--profile web`。更多用法与卸载命令请见 [`packages/dsh/README.md`](packages/dsh/README.md)。
 
 #### 3. Antigravity 桌面版 `0.2.1`
 

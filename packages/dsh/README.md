@@ -8,9 +8,25 @@
 
 Standalone UI plugin for **DSH (DeepSeek Harness)**. Unifies model search & switching, 16-bit TARDIS reasoning-effort selection, and session access permissions inside the composer model menu (while preserving DSH's built-in team switch).
 
-### Install on Windows Desktop / Web
+### Installation
 
-Quit DSH, open PowerShell, and install the `.tgz` package (download `dsh-tardis-effort-0.1.1.tgz` from [Releases](https://github.com/JOJO1999-tpi/tardis-effort-kit/releases) or build locally with `npm pack`):
+#### Option 1: Install inside DSH UI (Recommended)
+
+Open DSH → **Plugins → + Add plugin**, and paste any of the following:
+
+- **GitHub Repository URL**:
+  ```text
+  https://github.com/JOJO1999-tpi/tardis-effort-kit
+  ```
+- **Direct Release `.tgz` URL**:
+  ```text
+  https://github.com/JOJO1999-tpi/tardis-effort-kit/releases/download/v1.0.0/dsh-tardis-effort-0.1.1.tgz
+  ```
+- **Local `.tgz` Absolute Path**: Download `dsh-tardis-effort-0.1.1.tgz` from [Releases](https://github.com/JOJO1999-tpi/tardis-effort-kit/releases) and enter its full local path (e.g. `C:\Users\<user>\Downloads\dsh-tardis-effort-0.1.1.tgz`).
+
+#### Option 2: CLI Install (Windows Desktop / `dsh web`)
+
+Quit DSH, open PowerShell, and install the `.tgz` package (downloaded from [Releases](https://github.com/JOJO1999-tpi/tardis-effort-kit/releases) or built locally with `npm pack`):
 
 ```powershell
 $dsh = '<path-to-dsh>\resources\runtime\cli\bin\dsh.cmd'
@@ -19,7 +35,7 @@ $package = '<path-to>\dsh-tardis-effort-0.1.1.tgz'
 ```
 
 - For `dsh web`, replace `--profile desktop` with `--profile web`.
-- To upgrade, re-run the `add` command under the same `--profile` with the newer `.tgz`.
+- To upgrade, uninstall first or re-run the `add` command under the same `--profile` with the newer `.tgz`.
 - You can disable **TARDIS Model Panel** from DSH's Plugins page, or quit DSH and remove it completely:
 
 ```powershell
@@ -50,9 +66,25 @@ npm pack
 
 DSH（DeepSeek Harness）的独立界面插件。在输入框模型菜单里集中搜索和切换模型、调整推理强度、查看和切换当前会话的访问权限。团队开关由 DSH 提供。
 
-### 在 Windows 桌面版 / Web 版安装
+### 安装方式
 
-退出 DSH。打开 PowerShell，用本机 `dsh` 命令安装发布包（可从 [Releases](https://github.com/JOJO1999-tardis-effort-kit/releases) 下载 `dsh-tardis-effort-0.1.1.tgz`，或在源码目录运行 `npm pack` 生成），再启动 DSH：
+#### 方式一：在 DSH 界面直接安装（推荐）
+
+打开 DSH → **插件 → + 添加插件**，输入以下任意一种地址即可安装：
+
+- **GitHub 仓库地址（最直接）**：
+  ```text
+  https://github.com/JOJO1999-tpi/tardis-effort-kit
+  ```
+- **Release `.tgz` 直链**：
+  ```text
+  https://github.com/JOJO1999-tpi/tardis-effort-kit/releases/download/v1.0.0/dsh-tardis-effort-0.1.1.tgz
+  ```
+- **本地 `.tgz` 绝对路径**：从 [Releases](https://github.com/JOJO1999-tpi/tardis-effort-kit/releases) 下载 `dsh-tardis-effort-0.1.1.tgz` 后填入完整路径（如 `C:\Users\<user>\Downloads\dsh-tardis-effort-0.1.1.tgz`）。
+
+#### 方式二：命令行安装（Windows 桌面版 / `dsh web`）
+
+退出 DSH。打开 PowerShell，用本机 `dsh` 命令安装发布包（可从 [Releases](https://github.com/JOJO1999-tpi/tardis-effort-kit/releases) 下载 `dsh-tardis-effort-0.1.1.tgz`，或在源码目录运行 `npm pack` 生成），再启动 DSH：
 
 ```powershell
 $dsh = '<path-to-dsh>\resources\runtime\cli\bin\dsh.cmd'
@@ -60,7 +92,7 @@ $package = '<path-to>\dsh-tardis-effort-0.1.1.tgz'
 & $dsh plugin --profile desktop add "file:$package"
 ```
 
-使用 `dsh web` 时，把 `--profile desktop` 换成 `--profile web`。更新插件时，在同一个 profile 用新版 `.tgz` 重新执行安装命令。
+使用 `dsh web` 时，把 `--profile desktop` 换成 `--profile web`。更新插件时，请先卸载或用新版 `.tgz` 在同一个 profile 重新安装。
 
 在 DSH 的「插件」页可停用「TARDIS 推理面板」。也可以退出 DSH 后移除整个插件包：
 
