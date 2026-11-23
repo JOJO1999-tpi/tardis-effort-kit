@@ -4,6 +4,13 @@
 
 [English](#english) | [简体中文](#简体中文)
 
+> [!TIP]
+> ### 不会安装？直接把本仓库链接粘贴给你的 Agent，让它帮你装！
+> **不会手动安装也没关系，直接复制链接 `https://github.com/JOJO1999-tpi/tardis-effort-kit` 发给你的 AI Agent（Hermes / DSH / Antigravity 等），让它根据 README 自动帮你安装。**
+>
+> ### Not sure how to install? Paste this link to your AI Agent!
+> **Just paste `https://github.com/JOJO1999-tpi/tardis-effort-kit` to your AI Agent and ask it to install the plugin for you.**
+
 <p align="center">
   <img src="assets/tardis-effort-demo.gif" alt="TARDIS Thinking Effort Slider Demo" width="760" />
 </p>
