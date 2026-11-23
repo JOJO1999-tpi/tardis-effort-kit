@@ -1,0 +1,267 @@
+/* The native model menu owns positioning, closing, and its extension rows. */
+div[role="menu"]:has(.dsh-tardis-panel) {
+  --tardis-bg: #141821;
+  --tardis-raised: #1c2230;
+  --tardis-hover: #232b3b;
+  --tardis-line: #2d3647;
+  --tardis-text: #eef1f8;
+  --tardis-muted: #a2adbf;
+  --tardis-accent: #8cdef7;
+  box-sizing: border-box;
+  width: min(480px, calc(100vw - 24px));
+  min-width: 0;
+  max-width: none;
+  max-height: min(600px, calc(100dvh - 84px));
+  overflow: auto;
+  padding: 8px;
+  border: 1px solid var(--tardis-line);
+  border-radius: 18px;
+  background: var(--tardis-bg);
+  color: var(--tardis-text);
+  box-shadow: 0 18px 52px #05080e99;
+  color-scheme: dark;
+}
+
+/* The two stock drill-in buttons precede this slot in DSH's root menu.
+   Leave switches, confirmation controls and peer extensions accessible. */
+div[role="menu"]:has(.dsh-tardis-panel) > :nth-child(-n + 2 of button[role="menuitem"]) {
+  display: none;
+}
+
+.dsh-tardis-panel {
+  flex: 0 0 auto;
+  min-width: 0;
+  display: grid;
+  gap: 8px;
+  line-height: 1.35;
+  font-size: 13px;
+}
+
+.dsh-tardis-panel button {
+  appearance: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  border: 0;
+  background: none;
+}
+
+.dsh-tardis-panel button[aria-disabled="true"],
+.dsh-tardis-panel button:disabled { cursor: default; }
+
+.dsh-tardis-panel :is(button, input, [role="slider"]):focus-visible {
+  outline: 2px solid var(--tardis-accent);
+  outline-offset: -2px;
+}
+
+.dsh-tardis-panel .dsh-tardis-search {
+  display: grid;
+  grid-template-columns: 15px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px;
+  height: 41px;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  background: var(--tardis-raised);
+}
+
+.dsh-tardis-search:focus-within { border-color: #477d95; }
+.dsh-tardis-search input {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--tardis-text);
+  font: inherit;
+}
+.dsh-tardis-search input::placeholder { color: var(--tardis-muted); }
+.dsh-tardis-panel .dsh-tardis-search input:focus-visible { outline: none; }
+.dsh-tardis-search-icon {
+  width: 10px;
+  height: 10px;
+  position: relative;
+  border: 1.5px solid var(--tardis-accent);
+  border-radius: 50%;
+}
+.dsh-tardis-search-icon::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 1.5px;
+  top: 8px;
+  left: 7px;
+  background: var(--tardis-accent);
+  transform: rotate(45deg);
+}
+.dsh-tardis-search kbd {
+  color: var(--tardis-muted);
+  font: inherit;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.dsh-tardis-models {
+  display: grid;
+  align-content: start;
+  gap: 3px;
+  max-height: 166px;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.dsh-tardis-panel .dsh-tardis-model {
+  min-width: 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr) auto 15px;
+  align-items: center;
+  min-height: 37px;
+  gap: 8px;
+  padding: 5px 9px;
+  border-radius: 9px;
+  text-align: left;
+}
+.dsh-tardis-model:hover,
+.dsh-tardis-model[data-tardis-highlighted="true"],
+.dsh-tardis-model[aria-pressed="true"] { background: var(--tardis-hover); }
+.dsh-tardis-model[aria-pressed="true"] .dsh-tardis-name { font-weight: 700; }
+.dsh-tardis-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dsh-tardis-status,
+.dsh-tardis-failures { color: var(--tardis-muted); }
+.dsh-tardis-status,
+.dsh-tardis-failures,
+.dsh-tardis-error { padding: 5px 8px; }
+.dsh-tardis-error { color: #ffd0bb; overflow-wrap: anywhere; }
+.dsh-tardis-error button { text-decoration: underline; }
+.dsh-tardis-check { grid-column: 4; color: #80e5ec; text-align: center; }
+.dsh-tardis-mark {
+  --mark-color: #9ebdff;
+  display: inline-grid;
+  place-items: center;
+  width: 23px;
+  height: 23px;
+  flex: 0 0 auto;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--mark-color) 13%, transparent);
+  color: var(--mark-color);
+  font-size: 15px;
+  line-height: 1;
+}
+.dsh-tardis-badge {
+  color: var(--tardis-muted, var(--dsw-alias-label-caption));
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.dsh-tardis-effort {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid var(--tardis-line);
+  border-radius: 13px;
+  min-width: 0;
+  background: var(--tardis-raised);
+}
+.dsh-tardis-effort-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+.dsh-tardis-effort-head > span { color: var(--tardis-muted); font-size: 12px; }
+.dsh-tardis-effort-value { margin-inline-start: 9px; color: var(--tardis-accent); }
+.dsh-tardis-panel .tardis-slider-root { display: grid; gap: 5px; }
+.dsh-tardis-panel .tardis-capsule-wrap {
+  position: relative;
+  height: 62px;
+  border: 1px solid #3a4965;
+  border-radius: 32px;
+  overflow: hidden;
+  background: #070b14;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+.dsh-tardis-panel .tardis-capsule-wrap.is-dragging { cursor: grabbing; }
+.dsh-tardis-panel .tardis-canvas { display: block; width: 100%; height: 100%; image-rendering: pixelated; }
+.dsh-tardis-panel .tardis-capsule-vignette {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 0 12px #0007;
+}
+.dsh-tardis-panel .tardis-stops {
+  display: grid;
+  grid-template-columns: repeat(var(--stop-count), minmax(0, 1fr));
+  gap: 3px;
+}
+.dsh-tardis-panel .tardis-stop-btn {
+  min-width: 0;
+  min-height: 28px;
+  padding: 3px;
+  border-radius: 7px;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+  color: var(--tardis-muted);
+}
+.dsh-tardis-panel .tardis-stop-btn:hover { background: var(--tardis-hover); }
+.dsh-tardis-panel .tardis-stop-btn[aria-checked="true"] {
+  color: var(--tardis-text);
+  background: #303e53;
+  font-weight: 600;
+}
+
+.dsh-tardis-access { border-top: 1px solid var(--tardis-line); padding-top: 8px; }
+.dsh-tardis-access-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 9px;
+  color: var(--tardis-muted);
+}
+.dsh-tardis-segments {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 3px;
+  gap: 2px;
+  border-radius: 9px;
+  background: var(--tardis-raised);
+}
+.dsh-tardis-segments button {
+  padding: 5px 7px;
+  border-radius: 6px;
+  white-space: nowrap;
+  font-size: 12px;
+}
+.dsh-tardis-segments button:hover { background: var(--tardis-hover); }
+.dsh-tardis-segments button[aria-pressed="true"] {
+  background: #344256;
+  color: var(--tardis-text);
+  font-weight: 600;
+}
+.dsh-tardis-confirm {
+  margin-top: 8px;
+  padding: 10px;
+  border-radius: 9px;
+  background: var(--tardis-raised);
+  border: 1px solid #775b48;
+}
+.dsh-tardis-confirm p { margin: 5px 0 8px; color: var(--tardis-muted); }
+.dsh-tardis-confirm input { accent-color: var(--tardis-accent); }
+.dsh-tardis-confirm-actions { display: flex; justify-content: flex-end; gap: 6px; margin-top: 8px; }
+.dsh-tardis-confirm-actions button { border-radius: 6px; background: var(--tardis-hover); padding: 4px 8px; }
+.dsh-tardis-confirm-actions button:disabled { opacity: .55; }
+
+.dsh-tardis-trigger-name { display: inline-flex; align-items: center; vertical-align: middle; gap: 5px; max-width: 100%; }
+.dsh-tardis-trigger-name .dsh-tardis-mark { width: 19px; height: 19px; font-size: 12px; }
+button:has(.dsh-tardis-trigger-name) {
+  border-radius: 999px;
+  padding-inline: 7px;
+  background: var(--dsw-alias-interactive-bg-hover);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dsh-tardis-panel * { scroll-behavior: auto; }
+}

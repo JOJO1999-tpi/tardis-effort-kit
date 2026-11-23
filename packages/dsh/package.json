@@ -1,0 +1,18 @@
+{
+  "name": "dsh-tardis-effort",
+  "version": "0.1.1",
+  "description": "TARDIS 模型选择和推理强度面板 for DeepSeek Harness",
+  "type": "module",
+  "exports": {
+    ".": "./src/host.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json"
+  },
+  "files": ["cordis.patch.yml", "src/host.js", "lib/client.js", "locale/*.json", "README.md"],
+  "scripts": { "build": "node build.cjs" },
+  "dsh": {
+    "bundle": { "patch": "./cordis.patch.yml" },
+    "client": { "platform": "web" }
+  }
+}
